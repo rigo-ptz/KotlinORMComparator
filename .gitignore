@@ -16,3 +16,4 @@ build
 gradle.properties
 gradlew.bat
 gradlew
+settings.gradle
