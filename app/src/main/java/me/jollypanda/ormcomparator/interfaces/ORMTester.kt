@@ -1,7 +1,9 @@
-package me.jollypanda.ormcomparator.utils
+package me.jollypanda.ormcomparator.interfaces
+
+import me.jollypanda.ormcomparator.utils.ORMResult
 
 /**
- * Abstract class for all tester classes.
+ * Interface for all tester classes.
  *
  * @author Yamushev Igor
  * @since  23.09.16

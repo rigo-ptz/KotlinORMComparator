@@ -2,6 +2,7 @@ package me.jollypanda.ormcomparator.orm_lite
 
 import android.content.Context
 import com.j256.ormlite.android.apptools.OpenHelperManager
+import me.jollypanda.ormcomparator.interfaces.ORMTester
 import me.jollypanda.ormcomparator.utils.*
 import rx.Observable
 import java.sql.SQLException
@@ -16,12 +17,10 @@ class OrmLiteTester(val context: Context) : ORMTester {
 
     lateinit var result: ORMResult
 
-    override fun getTestResult(): ORMResult {
-        return result
-    }
+    override fun getTestResult() = result
 
     fun getObservable(): Observable<ORMResult> {
-        return ResultObservableFactory.getWriteResultObservable(context, this)
+        return ResultObservableFactory.getWriteResultObservable(this)
     }
 
     override fun testWrite() {

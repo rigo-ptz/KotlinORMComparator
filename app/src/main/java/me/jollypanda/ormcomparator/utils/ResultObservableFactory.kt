@@ -1,6 +1,6 @@
 package me.jollypanda.ormcomparator.utils
 
-import android.content.Context
+import me.jollypanda.ormcomparator.interfaces.ORMTester
 import rx.Observable
 
 /**
@@ -11,7 +11,7 @@ import rx.Observable
  */
 object ResultObservableFactory {
 
-    fun getWriteResultObservable(context: Context, ormTester: ORMTester): Observable<ORMResult> =
+    fun getWriteResultObservable(ormTester: ORMTester): Observable<ORMResult> =
             Observable.create { subscriber ->
             if (subscriber.isUnsubscribed)
                 return@create
@@ -26,7 +26,7 @@ object ResultObservableFactory {
             }
         }
 
-    fun getReadResultObservable(context: Context, ormTester: ORMTester): Observable<ORMResult> =
+    fun getReadResultObservable(ormTester: ORMTester): Observable<ORMResult> =
             Observable.create { subscriber ->
                 if (subscriber.isUnsubscribed)
                     return@create

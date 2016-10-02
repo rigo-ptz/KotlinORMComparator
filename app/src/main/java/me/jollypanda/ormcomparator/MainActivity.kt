@@ -3,6 +3,7 @@ package me.jollypanda.ormcomparator
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
+import me.jollypanda.ormcomparator.green_dao.GreenDaoTester
 import me.jollypanda.ormcomparator.orm_lite.OrmLiteTester
 import me.jollypanda.ormcomparator.realm.RealmTester
 import me.jollypanda.ormcomparator.utils.ORMResult
@@ -33,8 +34,11 @@ class MainActivity : BaseActivity() {
     private fun startTests() {
         val realmObservable = RealmTester(this).getObservable()
         val ormLiteObservable = OrmLiteTester(this).getObservable()
+        val greenDaoObservable = GreenDaoTester(applicationContext).getObservable()
 
-        val resultObservable = Observable.merge(realmObservable, ormLiteObservable)
+        val resultObservable = Observable.concat(realmObservable,
+                ormLiteObservable,
+                greenDaoObservable)
 
         resultObservable.compose(bindToLifecycle<ORMResult>())
                 .subscribeOn(Schedulers.newThread())

@@ -7,6 +7,7 @@ package me.jollypanda.ormcomparator.utils
  * @since  26.09.16
  */
 val ITEM_COUNT: Int = 10000
-val ORM_COUNT: Int = 2
+val ORM_COUNT: Int = 3
 val REALM_NAME: String = "Realm.io"
 val ORMLITE_NAME: String = "OrmLite"
+val GREENDAO_NAME: String = "GreenDao"

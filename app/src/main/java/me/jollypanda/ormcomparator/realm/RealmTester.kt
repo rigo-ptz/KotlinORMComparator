@@ -2,8 +2,8 @@ package me.jollypanda.ormcomparator.realm
 
 import android.content.Context
 import io.realm.Realm
+import me.jollypanda.ormcomparator.interfaces.ORMTester
 import me.jollypanda.ormcomparator.utils.*
-import rx.Observable
 
 /**
  * Tester for Realm DB
@@ -15,13 +15,9 @@ class RealmTester(val context: Context) : ORMTester {
 
      lateinit var result: ORMResult
 
-    override fun getTestResult(): ORMResult {
-        return result
-    }
+    override fun getTestResult() = result
 
-    fun getObservable(): Observable<ORMResult> {
-        return ResultObservableFactory.getWriteResultObservable(context, this)
-    }
+    fun getObservable() = ResultObservableFactory.getWriteResultObservable(this)
 
     override fun testWrite() {
         val realm = Realm.getDefaultInstance()

@@ -1,9 +1,14 @@
+apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'realm-android'
+
+repositories {
+    mavenCentral()
+}
 
 android {
     compileSdkVersion 24
@@ -26,8 +31,10 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
+}
 
-
+greendao {
+    schemaVersion 1
 }
 
 dependencies {
@@ -59,8 +66,8 @@ dependencies {
     // OrmLite
     compile 'com.j256.ormlite:ormlite-core:4.48'
     compile 'com.j256.ormlite:ormlite-android:4.48'
+
+    //GreenDAO
+    compile 'org.greenrobot:greendao:3.1.1'
 }
 
-repositories {
-    mavenCentral()
-}
