@@ -4,6 +4,7 @@ import android.content.Context
 import io.realm.Realm
 import me.jollypanda.ormcomparator.interfaces.ORMTester
 import me.jollypanda.ormcomparator.utils.*
+import rx.Observable
 
 /**
  * Tester for Realm DB
@@ -13,11 +14,15 @@ import me.jollypanda.ormcomparator.utils.*
  */
 class RealmTester(val context: Context) : ORMTester {
 
-     lateinit var result: ORMResult
+    lateinit var result: ORMResult
 
     override fun getTestResult() = result
 
-    fun getWriteObservable() = ResultObservableFactory.getWriteResultObservable(this)
+    override fun getWriteObservable() = ResultObservableFactory.getWriteResultObservable(this)
+
+    override fun getReadObservable(): Observable<ORMResult> {
+        throw UnsupportedOperationException("not implemented")
+    }
 
     override fun testWrite() {
         val realm = Realm.getDefaultInstance()

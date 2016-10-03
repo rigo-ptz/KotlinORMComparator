@@ -9,7 +9,7 @@ Also it's a first practice with ReactiveX.
 - [x] OrmLite
 - [x] SugarOrm
 - [x] GreenDao
-- [ ] ActiveAndroid
+- [x] ActiveAndroid
 - [ ] DBFlow
 - [ ] Ollie
 - [ ] Cupboard

@@ -4,6 +4,7 @@ import android.content.Context
 import com.orm.SugarRecord
 import me.jollypanda.ormcomparator.interfaces.ORMTester
 import me.jollypanda.ormcomparator.utils.*
+import rx.Observable
 
 /**
  * Tester for SugarOrm
@@ -17,7 +18,11 @@ class SugarOrmTester(context: Context) : ORMTester {
 
     override fun getTestResult() = result
 
-    fun getWriteObservable() = ResultObservableFactory.getWriteResultObservable(this)
+    override fun getWriteObservable() = ResultObservableFactory.getWriteResultObservable(this)
+
+    override fun getReadObservable(): Observable<ORMResult> {
+        throw UnsupportedOperationException("not implemented")
+    }
 
     override fun testWrite() {
         val studentsCollection = createStudentsCollection(SugarOrmStudentModel::class.java, ITEM_COUNT)

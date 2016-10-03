@@ -8,6 +8,7 @@ apply plugin: 'realm-android'
 
 repositories {
     mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
 android {
@@ -72,5 +73,8 @@ dependencies {
 
     // SugarOrm
     compile 'com.github.satyan:sugar:1.5'
+
+    // ActiveAndroid
+    compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
 }
 

@@ -1,6 +1,7 @@
 package me.jollypanda.ormcomparator
 
 import android.app.Application
+import com.activeandroid.ActiveAndroid
 import com.orm.SugarContext
 import io.realm.Realm
 import io.realm.RealmConfiguration
@@ -25,6 +26,8 @@ class ORMApplication : Application() {
         daoSession = DaoMaster(helper.writableDb).newSession()
 
         SugarContext.init(this)
+
+        ActiveAndroid.initialize(this)
     }
 
     override fun onTerminate() {

@@ -14,6 +14,10 @@
         <meta-data android:name="QUERY_LOG" android:value="false" />
         <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="me.jollypanda.ormcomparator.sugar_orm" />
 
+        <meta-data android:name="AA_DB_NAME" android:value="activeandroid.db" />
+        <meta-data android:name="AA_DB_VERSION" android:value="1" />
+        <meta-data android:name="AA_MODELS" android:value="me.jollypanda.ormcomparator.activeandroid.ActiveAndroidStudentModel" />
+
         <activity android:name="me.jollypanda.ormcomparator.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

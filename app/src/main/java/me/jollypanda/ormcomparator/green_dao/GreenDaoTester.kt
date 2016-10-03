@@ -19,8 +19,12 @@ class GreenDaoTester(val context: Context) : ORMTester {
 
     override fun getTestResult() = result
 
-    fun getWriteObservable(): Observable<ORMResult> {
+    override fun getWriteObservable(): Observable<ORMResult> {
         return ResultObservableFactory.getWriteResultObservable(this)
+    }
+
+    override fun getReadObservable(): Observable<ORMResult> {
+        throw UnsupportedOperationException("not implemented")
     }
 
     override fun testWrite() {

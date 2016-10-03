@@ -1,6 +1,7 @@
 package me.jollypanda.ormcomparator.interfaces
 
 import me.jollypanda.ormcomparator.utils.ORMResult
+import rx.Observable
 
 /**
  * Interface for all tester classes.
@@ -12,4 +13,6 @@ interface ORMTester {
     fun getTestResult(): ORMResult
     fun testWrite()
     fun testRead()
+    fun getWriteObservable(): Observable<ORMResult>
+    fun getReadObservable(): Observable<ORMResult>
 }
