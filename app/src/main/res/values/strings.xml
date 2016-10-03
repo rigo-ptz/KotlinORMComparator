@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">ORMComparator</string>
     <string name="startWriteTest">Start WRITE test</string>
-    <string name="startReadTest">Start READ test</string>
+    <string name="startReadTest">Start READ test\n(Test for last write results)</string>
 </resources>

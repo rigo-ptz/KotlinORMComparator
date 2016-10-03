@@ -17,7 +17,7 @@ class RealmTester(val context: Context) : ORMTester {
 
     override fun getTestResult() = result
 
-    fun getObservable() = ResultObservableFactory.getWriteResultObservable(this)
+    fun getWriteObservable() = ResultObservableFactory.getWriteResultObservable(this)
 
     override fun testWrite() {
         val realm = Realm.getDefaultInstance()

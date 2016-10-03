@@ -7,7 +7,7 @@ Also it's a first practice with ReactiveX.
 
 - [x] Realm.io
 - [x] OrmLite
-- [ ] SugarOrm
+- [x] SugarOrm
 - [x] GreenDao
 - [ ] ActiveAndroid
 - [ ] DBFlow

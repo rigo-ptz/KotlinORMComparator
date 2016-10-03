@@ -6,6 +6,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import me.jollypanda.ormcomparator.green_dao.GreenDaoTester
 import me.jollypanda.ormcomparator.orm_lite.OrmLiteTester
 import me.jollypanda.ormcomparator.realm.RealmTester
+import me.jollypanda.ormcomparator.sugar_orm.SugarOrmTester
 import me.jollypanda.ormcomparator.utils.ORMResult
 import me.jollypanda.ormcomparator.utils.OrmWriteSubscriber
 import rx.Observable
@@ -27,18 +28,20 @@ class MainActivity : BaseActivity() {
 
         btnStartWriteTest.setOnClickListener {
             pbMainWrite.visibility = View.VISIBLE
-            startTests()
+            startWriteTests()
         }
     }
 
-    private fun startTests() {
-        val realmObservable = RealmTester(this).getObservable()
-        val ormLiteObservable = OrmLiteTester(this).getObservable()
-        val greenDaoObservable = GreenDaoTester(applicationContext).getObservable()
+    private fun startWriteTests() {
+        val realmObservable = RealmTester(this).getWriteObservable()
+        val ormLiteObservable = OrmLiteTester(this).getWriteObservable()
+        val greenDaoObservable = GreenDaoTester(applicationContext).getWriteObservable()
+        val sugarOrmObservable = SugarOrmTester(this).getWriteObservable()
 
         val resultObservable = Observable.concat(realmObservable,
                 ormLiteObservable,
-                greenDaoObservable)
+                greenDaoObservable,
+                sugarOrmObservable)
 
         resultObservable.compose(bindToLifecycle<ORMResult>())
                 .subscribeOn(Schedulers.newThread())

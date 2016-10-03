@@ -69,5 +69,8 @@ dependencies {
 
     //GreenDAO
     compile 'org.greenrobot:greendao:3.1.1'
+
+    // SugarOrm
+    compile 'com.github.satyan:sugar:1.5'
 }
 

@@ -1,6 +1,7 @@
 package me.jollypanda.ormcomparator
 
 import android.app.Application
+import com.orm.SugarContext
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import me.jollypanda.ormcomparator.green_dao.DaoMaster
@@ -22,6 +23,13 @@ class ORMApplication : Application() {
 
         val helper = DaoMaster.DevOpenHelper(this, "db_greenDAO")
         daoSession = DaoMaster(helper.writableDb).newSession()
+
+        SugarContext.init(this)
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        SugarContext.terminate()
     }
 
 }

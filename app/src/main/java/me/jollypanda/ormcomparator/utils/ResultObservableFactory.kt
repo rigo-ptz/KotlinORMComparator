@@ -13,18 +13,18 @@ object ResultObservableFactory {
 
     fun getWriteResultObservable(ormTester: ORMTester): Observable<ORMResult> =
             Observable.create { subscriber ->
-            if (subscriber.isUnsubscribed)
-                return@create
+                if (subscriber.isUnsubscribed)
+                    return@create
 
-            try {
-                ormTester.testWrite()
-                val res = ormTester.getTestResult()
-                subscriber.onNext(res)
-                subscriber.onCompleted()
-            } catch (e: Exception) {
-                subscriber.onError(e)
+                try {
+                    ormTester.testWrite()
+                    val res = ormTester.getTestResult()
+                    subscriber.onNext(res)
+                    subscriber.onCompleted()
+                } catch (e: Exception) {
+                    subscriber.onError(e)
+                }
             }
-        }
 
     fun getReadResultObservable(ormTester: ORMTester): Observable<ORMResult> =
             Observable.create { subscriber ->

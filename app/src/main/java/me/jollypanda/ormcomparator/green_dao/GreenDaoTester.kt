@@ -19,7 +19,7 @@ class GreenDaoTester(val context: Context) : ORMTester {
 
     override fun getTestResult() = result
 
-    fun getObservable(): Observable<ORMResult> {
+    fun getWriteObservable(): Observable<ORMResult> {
         return ResultObservableFactory.getWriteResultObservable(this)
     }
 
