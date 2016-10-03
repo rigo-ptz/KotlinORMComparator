@@ -3,6 +3,8 @@ package me.jollypanda.ormcomparator
 import android.app.Application
 import com.activeandroid.ActiveAndroid
 import com.orm.SugarContext
+import com.raizlabs.android.dbflow.config.FlowConfig
+import com.raizlabs.android.dbflow.config.FlowManager
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import me.jollypanda.ormcomparator.green_dao.DaoMaster
@@ -28,6 +30,8 @@ class ORMApplication : Application() {
         SugarContext.init(this)
 
         ActiveAndroid.initialize(this)
+
+        FlowManager.init(FlowConfig.Builder(this).build())
     }
 
     override fun onTerminate() {

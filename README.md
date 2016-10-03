@@ -10,6 +10,6 @@ Also it's a first practice with ReactiveX.
 - [x] SugarOrm
 - [x] GreenDao
 - [x] ActiveAndroid
-- [ ] DBFlow
+- [x] DBFlow
 - [ ] Ollie
 - [ ] Cupboard

@@ -21,6 +21,7 @@ apply plugin: 'kotlin'
 allprojects {
     repositories {
         jcenter()
+        maven { url "https://www.jitpack.io" }
     }
 }
 
