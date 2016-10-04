@@ -11,5 +11,5 @@ Also it's a first practice with ReactiveX.
 - [x] GreenDao
 - [x] ActiveAndroid
 - [x] DBFlow
-- [ ] Ollie
+- [x] Ollie
 - [ ] Cupboard

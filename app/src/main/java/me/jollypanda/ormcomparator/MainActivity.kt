@@ -6,6 +6,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import me.jollypanda.ormcomparator.activeandroid.ActiveAndroidTester
 import me.jollypanda.ormcomparator.dbflow.DBFlowTester
 import me.jollypanda.ormcomparator.green_dao.GreenDaoTester
+import me.jollypanda.ormcomparator.ollie.OllieTester
 import me.jollypanda.ormcomparator.orm_lite.OrmLiteTester
 import me.jollypanda.ormcomparator.realm.RealmTester
 import me.jollypanda.ormcomparator.sugar_orm.SugarOrmTester
@@ -41,6 +42,7 @@ class MainActivity : BaseActivity() {
         val sugarOrmObservable = SugarOrmTester(this).getWriteObservable()
         val activeAndroidObservable = ActiveAndroidTester(this).getWriteObservable()
         val dbflowObservable = DBFlowTester(this).getWriteObservable()
+        val ollieObservable = OllieTester(this).getWriteObservable()
 
         val resultObservable = Observable.concat(realmObservable,
                 ormLiteObservable,
@@ -49,7 +51,7 @@ class MainActivity : BaseActivity() {
                 activeAndroidObservable,
                 dbflowObservable)
 
-        dbflowObservable.compose(bindToLifecycle<ORMResult>())
+        ollieObservable.compose(bindToLifecycle<ORMResult>())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(OrmWriteSubscriber(this))

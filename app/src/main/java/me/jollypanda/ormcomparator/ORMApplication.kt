@@ -9,6 +9,7 @@ import io.realm.Realm
 import io.realm.RealmConfiguration
 import me.jollypanda.ormcomparator.green_dao.DaoMaster
 import me.jollypanda.ormcomparator.green_dao.DaoSession
+import ollie.Ollie
 
 /**
  * Application class
@@ -32,6 +33,13 @@ class ORMApplication : Application() {
         ActiveAndroid.initialize(this)
 
         FlowManager.init(FlowConfig.Builder(this).build())
+
+        Ollie.with(this)
+                .setName("db_ollie")
+                .setVersion(1)
+                .setLogLevel(Ollie.LogLevel.FULL)
+                .setCacheSize(1)
+                .init()
     }
 
     override fun onTerminate() {
