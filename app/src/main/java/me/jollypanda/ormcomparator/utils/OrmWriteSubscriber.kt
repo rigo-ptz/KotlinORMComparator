@@ -1,12 +1,8 @@
 package me.jollypanda.ormcomparator.utils
 
 import android.content.Context
-import android.graphics.Color
-import android.util.TypedValue
 import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
+import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main.*
 import me.jollypanda.ormcomparator.MainActivity
 import rx.Subscriber
@@ -23,23 +19,9 @@ class OrmWriteSubscriber(val context: Context) : Subscriber<ORMResult>() {
     var counter: Int = 0
 
     override fun onNext(result: ORMResult?) {
+        saveOrmResult(result, counter)
+        (context as MainActivity).showResult(result, counter)
         counter++
-        val tvRes = TextView(context)
-        tvRes.text = result.toString()
-        tvRes.layoutParams = ViewGroup.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT)
-        (context as MainActivity).llWriteInfoContainer.addView(tvRes)
-
-        if (counter == ORM_COUNT) {
-            (context as MainActivity).pbMainWrite.visibility = View.GONE
-            val divider = View(context)
-            divider.setBackgroundColor(Color.GRAY)
-            divider.setPadding(0, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8f, context.resources.displayMetrics).toInt(),
-                    0, 0)
-            divider.layoutParams = ViewGroup.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                    TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2f, context.resources.displayMetrics).toInt())
-            (context as MainActivity).llWriteInfoContainer.addView(divider)
-        }
     }
 
     override fun onCompleted() {
@@ -47,6 +29,19 @@ class OrmWriteSubscriber(val context: Context) : Subscriber<ORMResult>() {
 
     override fun onError(e: Throwable?) {
         (context as MainActivity).pbMainWrite.visibility = View.GONE
+    }
+
+    private fun saveOrmResult(result: ORMResult?, counter: Int) {
+        val realm = Realm.getDefaultInstance()
+        if (counter == 1)
+            realm.executeTransaction { realm ->
+                realm.delete(ORMResult::class.java)
+            }
+
+        realm.executeTransaction { realm ->
+            realm.copyToRealm(result)
+        }
+        realm.close()
     }
 
 }

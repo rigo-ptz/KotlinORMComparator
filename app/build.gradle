@@ -88,5 +88,8 @@ dependencies {
     // Ollie
     compile 'com.michaelpardo:ollie:0.3.2-SNAPSHOT'
     provided 'com.michaelpardo:ollie-compiler:0.3.2-SNAPSHOT'
+
+    //Cupboard
+    compile 'nl.qbusict:cupboard:2.1.4'
 }
 
