@@ -6,7 +6,7 @@ package me.jollypanda.ormcomparator.utils
  * @author Yamushev Igor
  * @since  26.09.16
  */
-val ITEM_COUNT: Int = 10000
+val ITEM_COUNT: Int = 100
 val ORM_COUNT: Int = 7
 val REALM_NAME: String = "Realm.io"
 val ORMLITE_NAME: String = "OrmLite"

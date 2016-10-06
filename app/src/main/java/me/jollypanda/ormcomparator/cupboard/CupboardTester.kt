@@ -4,7 +4,6 @@ import android.content.Context
 import me.jollypanda.ormcomparator.interfaces.ORMTester
 import me.jollypanda.ormcomparator.utils.*
 import nl.qbusict.cupboard.CupboardFactory
-import rx.Observable
 
 /**
  * Tester for Cupboard.
@@ -20,9 +19,7 @@ class CupboardTester(val context: Context) : ORMTester {
 
     override fun getWriteObservable() = ResultObservableFactory.getWriteResultObservable(this)
 
-    override fun getReadObservable(): Observable<ORMResult> {
-        throw UnsupportedOperationException("not implemented")
-    }
+    override fun getReadObservable() = ResultObservableFactory.getReadResultObservable(this)
 
     override fun testWrite() {
         val dbHelper = CupboardDbHelper(context)
@@ -35,6 +32,7 @@ class CupboardTester(val context: Context) : ORMTester {
         val startTime = System.currentTimeMillis()
         dbc.put(studentsCollection)
         val endTime = System.currentTimeMillis()
+        dbHelper.close()
         result = ORMResult(СUPBOARD_NAME, 1, endTime - startTime, ITEM_COUNT)
     }
 
@@ -46,7 +44,7 @@ class CupboardTester(val context: Context) : ORMTester {
         val collection = dbc.query(CupboardStudentModel::class.java).list()
         val endTime = System.currentTimeMillis()
         db.close()
-        result = ORMResult(СUPBOARD_NAME, 0, endTime - startTime, ITEM_COUNT)
+        result = ORMResult(СUPBOARD_NAME, 0, endTime - startTime, collection.size)
     }
 
 }

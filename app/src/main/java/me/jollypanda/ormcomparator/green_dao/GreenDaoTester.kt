@@ -5,7 +5,6 @@ import com.j256.ormlite.android.apptools.OpenHelperManager
 import me.jollypanda.ormcomparator.ORMApplication
 import me.jollypanda.ormcomparator.interfaces.ORMTester
 import me.jollypanda.ormcomparator.utils.*
-import rx.Observable
 
 /**
  * Tester for GreenDAO.
@@ -19,13 +18,9 @@ class GreenDaoTester(val context: Context) : ORMTester {
 
     override fun getTestResult() = result
 
-    override fun getWriteObservable(): Observable<ORMResult> {
-        return ResultObservableFactory.getWriteResultObservable(this)
-    }
+    override fun getWriteObservable() = ResultObservableFactory.getWriteResultObservable(this)
 
-    override fun getReadObservable(): Observable<ORMResult> {
-        throw UnsupportedOperationException("not implemented")
-    }
+    override fun getReadObservable() = ResultObservableFactory.getReadResultObservable(this)
 
     override fun testWrite() {
         val daoSession = (context as ORMApplication?)?.daoSession
@@ -55,9 +50,9 @@ class GreenDaoTester(val context: Context) : ORMTester {
         val daoSession = (context as ORMApplication?)?.daoSession
         if (daoSession != null) {
             val startTime = System.currentTimeMillis()
-            daoSession.greenDaoStudentModelDao.loadAll()
+            val collection = daoSession.greenDaoStudentModelDao.loadAll()
             val endTime = System.currentTimeMillis()
-            result = ORMResult(GREENDAO_NAME, 0, endTime - startTime, ITEM_COUNT)
+            result = ORMResult(GREENDAO_NAME, 0, endTime - startTime, collection.size)
         }
     }
 }

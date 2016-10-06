@@ -10,7 +10,7 @@ import me.jollypanda.ormcomparator.interfaces.IStudent
  */
 open class CupboardStudentModel : IStudent {
 
-    open var _id: Long = 0
+    open var _id: Long? = null
     open var name: String = ""
     open var surname: String = ""
     open var age: Int = 0

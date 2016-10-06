@@ -14,7 +14,7 @@ import rx.Subscriber
  * @since  26.09.16
  * @see MainActivity
  */
-class OrmWriteSubscriber(val context: Context) : Subscriber<ORMResult>() {
+class OrmSubscriber(val context: Context) : Subscriber<ORMResult>() {
 
     var counter: Int = 0
 
@@ -33,10 +33,16 @@ class OrmWriteSubscriber(val context: Context) : Subscriber<ORMResult>() {
 
     private fun saveOrmResult(result: ORMResult?, counter: Int) {
         val realm = Realm.getDefaultInstance()
-        if (counter == 1)
-            realm.executeTransaction { realm ->
-                realm.delete(ORMResult::class.java)
-            }
+        if (counter == 0)
+            if (result?.readOrWrite == 1)
+                realm.executeTransaction { realm ->
+                    realm.where(ORMResult::class.java).equalTo("readOrWrite", 1).findAll().deleteAllFromRealm()
+                }
+            else
+                realm.executeTransaction { realm ->
+                    realm.where(ORMResult::class.java).equalTo("readOrWrite", 0).findAll().deleteAllFromRealm()
+                }
+
 
         realm.executeTransaction { realm ->
             realm.copyToRealm(result)

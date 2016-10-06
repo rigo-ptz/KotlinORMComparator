@@ -4,7 +4,6 @@ import android.content.Context
 import com.j256.ormlite.android.apptools.OpenHelperManager
 import me.jollypanda.ormcomparator.interfaces.ORMTester
 import me.jollypanda.ormcomparator.utils.*
-import rx.Observable
 import java.sql.SQLException
 
 /**
@@ -19,13 +18,9 @@ class OrmLiteTester(val context: Context) : ORMTester {
 
     override fun getTestResult() = result
 
-    override fun getWriteObservable(): Observable<ORMResult> {
-        return ResultObservableFactory.getWriteResultObservable(this)
-    }
+    override fun getWriteObservable() = ResultObservableFactory.getWriteResultObservable(this)
 
-    override fun getReadObservable(): Observable<ORMResult> {
-        throw UnsupportedOperationException("not implemented")
-    }
+    override fun getReadObservable() = ResultObservableFactory.getReadResultObservable(this)
 
     override fun testWrite() {
         val dbHelper = OpenHelperManager.getHelper(context, OrmLiteDBHelper::class.java)
@@ -69,15 +64,11 @@ class OrmLiteTester(val context: Context) : ORMTester {
         var startTime: Long = 0
         var endTime: Long = 0
 
-        try {
-            val dao = dbHelper.studentDAO
-            startTime = System.currentTimeMillis()
-            val collection = dao.queryForAll()
-            endTime = System.currentTimeMillis()
-        } catch (e: SQLException) {
+        val dao = dbHelper.studentDAO
+        startTime = System.currentTimeMillis()
+        val collection = dao.queryForAll()
+        endTime = System.currentTimeMillis()
 
-        }
-
-        result = ORMResult(ORMLITE_NAME, 0, endTime - startTime, ITEM_COUNT)
+        result = ORMResult(ORMLITE_NAME, 0, endTime - startTime, collection.size)
     }
 }
