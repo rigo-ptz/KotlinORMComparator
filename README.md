@@ -12,4 +12,6 @@ Also it's a first practice with ReactiveX.
 - [x] ActiveAndroid
 - [x] DBFlow
 - [x] Ollie
-- [ ] Cupboard
+- [x] Cupboard
+
+![alt Example view](https://github.com/rigo-ptz/KotlinORMComparator/blob/master/ex.png) 
