@@ -91,5 +91,8 @@ dependencies {
 
     //Cupboard
     compile 'nl.qbusict:cupboard:2.1.4'
+
+    // Charts
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.0-beta1'
 }
 
