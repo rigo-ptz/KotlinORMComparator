@@ -54,6 +54,7 @@ class MainActivity : BaseActivity(), MainContract.View {
         if (result != null) {
             val tvRes = TextView(this)
             tvRes.text = result.toString()
+            tvRes.tag = result.workTimeMills
             tvRes.layoutParams = ViewGroup.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT)
             if (result.readOrWrite == 1)
@@ -79,12 +80,51 @@ class MainActivity : BaseActivity(), MainContract.View {
                                 2f,
                                 resources.displayMetrics
                         ).toInt())
-                if (result.readOrWrite == 1)
+                if (result.readOrWrite == 1) {
                     llWriteInfoContainer.addView(divider)
-                else
+                    calculateAverage(llWriteInfoContainer)
+                } else {
                     llReadInfoContainer.addView(divider)
+                    calculateAverage(llReadInfoContainer)
+                }
             }
             invalidateChart(i, result)
+        }
+    }
+
+    private fun calculateAverage(container: LinearLayout) {
+        var list: MutableList<Float> = mutableListOf()
+        for (i in 0..ORM_COUNT - 1)
+            list.add(i, 0f)
+        var counter: Float = 0f
+        for (i in 0..container.childCount - 1) {
+            if (container.getChildAt(i) is TextView) {
+                val child = container.getChildAt(i)
+                val pos = i.mod(ORM_COUNT + 1)
+                list[pos] = list[pos] + child.tag.toString().toFloat()
+            } else
+                counter += 1
+        }
+        val size = list.size
+        for (i in 0..size - 1) {
+            list[i] = list[i] / counter
+        }
+
+        if (container.id == R.id.llWriteInfoContainer)
+            addAverageToContainer(list, llWriteAverageContainer)
+        else
+            addAverageToContainer(list, llReadAverageContainer)
+
+    }
+
+    private fun addAverageToContainer(list: MutableList<Float>, container: LinearLayout) {
+        container.removeAllViews()
+        for (i in 0..list.size - 1) {
+            val tv = TextView(this)
+            tv.text = list[i].toString()
+            tv.layoutParams = ViewGroup.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT)
+            container.addView(tv)
         }
     }
 
