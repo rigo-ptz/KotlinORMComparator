@@ -94,5 +94,6 @@ dependencies {
 
     // Charts
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.0-beta1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha9'
 }
 
